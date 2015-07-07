@@ -36,11 +36,10 @@ class qa_mmd_editor
                 
                 $html .= '<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { inlineMath: [["$","$"], ["\\(","\\)"]], displayMath: [["$$","$$"], ["\\[","\\]"]] }, "HTML-CSS": { availableFonts: ["STIX", "TeX"], linebreaks: { automatic: true }, imageFont: null } }); </script>' . "\n";      
                 
-                $html .= '<script src="'.$this->pluginurl.'libs/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>' . "\n";
-//                 $html .= '<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>' . "\n";
-
-/*                $html .= '<script src="'.$this->pluginurl.'libs/Markdown.Converter.js"></script>' . "\n";
-                $html .= '<script src="'.$this->pluginurl.'libs/Markdown.Sanitizer.js"></script>' . "\n";  */              
+//                $html .= '<script src="'.$this->pluginurl.'libs/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>' . "\n";
+                $html .= '<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>' . "\n";
+            
+            	/* the following .js's should be included in ./libs */
                 $html .= '<script src="'.$this->pluginurl.'libs/codemirror.js"></script>' . "\n";
                 $html .= '<script src="'.$this->pluginurl.'libs/markdown.js"></script>' . "\n";
                 $html .= '<script src="'.$this->pluginurl.'libs/overlay.js"></script>' . "\n";
@@ -54,9 +53,7 @@ class qa_mmd_editor
 		$html .= '<textarea data-uk-htmleditor="{markdown:true, mode:\'split\', codemirror:{ mode: \'gfm\', lineWrapping: true, dragDrop: false, autoCloseTags: true, matchTags: true, autoCloseBrackets: true, matchBrackets: true, indentUnit: 4, indentWithTabs: false, tabSize: 4, hintOptions: {completionSingle:false} }}" id="'.$fieldname.'" name="'.$fieldname.'">'.$content.'</textarea>' . "\n";
                 
                 $html .= '<script src="'.$this->pluginurl.'libs/mmd.js"></script>' . "\n";
-//                 $html .= '<script>Preview.Init();</script>' . "\n";
 
-                
 		return array( 'type'=>'custom', 'html'=>$html );
 	}
 
@@ -105,75 +102,3 @@ class qa_mmd_editor
 
 
 
-
-/* script */
-
-
-/*
-
-
-
-$(document).ready(function() { 
-        $(".CodeMirror-wrap textarea").map(function(e) {
- 		$(this).attr( "id","htmleditor-Input");
-                $(this).attr( "onkeyup","Preview.Update()");
-	});    
-        $(".uk-htmleditor-preview").map(function(e) {
- 		$(this).attr( "id","htmleditor-Preview");
-	});  	
-});
-
-
-
-var Preview = {
-  delay: 150,       
-
-  preview: null,    
-  buffer: null,      
-
-  timeout: null,    
-  mjRunning: false,  
-  oldText: null,    
-
-  Init: function () {
-    this.preview = document.getElementById("htmleditor-Preview");
-    this.buffer = document.getElementById("htmleditor-Buffer");
-  },
-
-  SwapBuffers: function () {
-    var buffer = this.preview, preview = this.buffer;
-    this.buffer = buffer; this.preview = preview;
-    buffer.style.visibility = "hidden"; buffer.style.position = "absolute";
-    preview.style.position = ""; preview.style.visibility = "";
-  },
-
-  Update: function () {
-    if (this.timeout) {clearTimeout(this.timeout)}
-    this.timeout = setTimeout(this.callback,this.delay);
-  },
-
-  CreatePreview: function () {
-    Preview.timeout = null;
-    if (this.mjRunning) return;
-    var text = document.getElementById("htmleditor-Input").value;
-    if (text === this.oldtext) return;
-    this.buffer.innerHTML = this.oldtext = text;
-    this.mjRunning = true;
-    MathJax.Hub.Queue(
-      ["Typeset",MathJax.Hub,this.buffer],
-      ["PreviewDone",this]
-    );
-  },
-
-  PreviewDone: function () {
-    this.mjRunning = false;
-    this.SwapBuffers();
-  }
-
-};
-
-Preview.callback = MathJax.Callback(["CreatePreview",Preview]);
-Preview.callback.autoReset = true; 
-
-
-*/
