@@ -16,4 +16,7 @@ Copyright (c) 2015 [Mohammad Hossein Ghaffari](http://www.mhghaffari.ir)
 
 [CodeMirror](http://codemirror.net/)
 
+[Remarkable](https://github.com/jonschlinkert/remarkable)
+
 [Marked](https://github.com/chjj/marked)
+
