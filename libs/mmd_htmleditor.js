@@ -532,9 +532,11 @@
 
         init: function(editor) {
 
-            var parser = editor.options.mdparser || marked || null;
+//             var parser = editor.options.mdparser || marked || null;
+            var md = new Remarkable({ html:         true,      xhtmlOut:     false,        breaks:       false,       langPrefix:   'language-', linkify:      false,        typographer:  false, quotes: '“”‘’', highlight: function () { return ''; } });  
 
-            if (!parser) return;
+//             if (!parser) return;       
+            if (!md) return;
 
             if (editor.options.markdown) {
                 enableMarkdown();
@@ -547,8 +549,8 @@
             addAction('link', '[$1](http://)');
             addAction('image', '![$1](http://)');
             
-//             addAction('FCB', '```javascript\n$1\n```');
-            addAction('FCB', '<code>$1</code>');
+            addAction('FCB', '```javascript\n$1\n```');
+//             addAction('FCB', '<code>$1</code>');
             
 
             editor.on('action.listUl', function() {
@@ -597,7 +599,9 @@
 
             editor.on('renderLate', function() {
                 if (editor.editor.options.mode == 'gfm') {
-                    editor.currentvalue = parser(editor.currentvalue);
+//                     editor.currentvalue = parser(editor.currentvalue);
+                        editor.currentvalue = md.render(editor.currentvalue);
+                    
                 }
             });
 
