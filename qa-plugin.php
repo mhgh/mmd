@@ -33,4 +33,6 @@ if ( !defined('QA_VERSION') )
 
 
 qa_register_plugin_module('editor', 'qa-mmd-editor.php', 'qa_mmd_editor', 'MathMirrorDown Editor');
+qa_register_plugin_layer('qa-mmd-layer.php', 'MathMirrorDown Editor layer');
+
 
