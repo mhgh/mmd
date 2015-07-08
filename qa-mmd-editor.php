@@ -78,11 +78,11 @@ class qa_mmd_editor
 		}
 	}
 
-	function load_script($fieldname)
-	{
-		return 'Preview.Init();' ;
-
-	}
+// 	function load_script($fieldname)
+// 	{
+// 		return '' ;
+// 
+// 	}
 
 
 // 	function update_script($fieldname) {
@@ -98,7 +98,3 @@ class qa_mmd_editor
 
 
 }
-
-
-
-
