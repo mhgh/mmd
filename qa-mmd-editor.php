@@ -20,9 +20,9 @@ class qa_mmd_editor
 
 	function calc_quality( $content, $format )
 	{
-		if ($format == 'html' or $format == 'markdown')
+		if ($format=='html')
 			return 1.0;
-		elseif ($format == '')
+		elseif ($format=='')
 			return 0.8;
 		else
 			return 0;
@@ -31,22 +31,7 @@ class qa_mmd_editor
 	function get_field(&$qa_content, $content, $format, $fieldname, $rows, $autofocus)
 	{                
                 $html = '<link rel="stylesheet" href="'.$this->pluginurl.'libs/codemirror.css">' . "\n";
-                
-//                 $html .= '<script src="'.$this->pluginurl.'libs/prettify.js"></script>' . "\n";
-                
-                $html .= '<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { inlineMath: [["$","$"], ["\\(","\\)"]], displayMath: [["$$","$$"], ["\\[","\\]"]] }, "HTML-CSS": { availableFonts: ["STIX", "TeX"], linebreaks: { automatic: true }, imageFont: null } }); </script>' . "\n";      
-                
-//                $html .= '<script src="'.$this->pluginurl.'libs/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>' . "\n";
-                $html .= '<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>' . "\n";
-            
-            	/* the following .js's should be included in ./libs */
-                $html .= '<script src="'.$this->pluginurl.'libs/codemirror.js"></script>' . "\n";
-                $html .= '<script src="'.$this->pluginurl.'libs/markdown.js"></script>' . "\n";
-                $html .= '<script src="'.$this->pluginurl.'libs/overlay.js"></script>' . "\n";
-                $html .= '<script src="'.$this->pluginurl.'libs/xml.js"></script>' . "\n";
-                $html .= '<script src="'.$this->pluginurl.'libs/gfm.js"></script>' . "\n";
-                $html .= '<script src="'.$this->pluginurl.'libs/marked.js"></script>' . "\n";
-                            
+                           
                 $html .= '<link rel="stylesheet" href="'.$this->pluginurl.'libs/htmleditor.css">' . "\n";
                 $html .= '<script src="'.$this->pluginurl.'libs/mmd_htmleditor.js"></script>' . "\n";
                              
@@ -60,22 +45,28 @@ class qa_mmd_editor
 	function read_post($fieldname) {
 		$html=qa_post_text($fieldname);
 		
-		$htmlformatting=preg_replace('/<\s*\/?\s*(br|p)\s*\/?\s*>/i', '', $html); // remove <p>, <br>, etc... since those are OK in text
+// 		$htmlformatting=preg_replace('/<\s*\/?\s*(br|p)\s*\/?\s*>/i', '', $html); // remove <p>, <br>, etc... since those are OK in text
 		
-		if (preg_match('/<.+>/', $htmlformatting)) // if still some other tags, it's worth keeping in HTML
-			return array(
-				'format' => 'html',
-				'content' => qa_sanitize_html($html, false, true), // qa_sanitize_html() is ESSENTIAL for security
-			);
-		
-		else { // convert to text
-			$viewer=qa_load_module('viewer', '');
+// 		if (preg_match('/<.+>/', $htmlformatting)) // if still some other tags, it's worth keeping in HTML
+// 			return array(
+// 				'format' => 'html',
+// 				'content' => qa_sanitize_html($html, false, true), // qa_sanitize_html() is ESSENTIAL for security
+// 			);
+// 		
+// 		else { // convert to text
+// 			$viewer=qa_load_module('viewer', '');
+// 
+// 			return array(
+// 				'format' => '',
+// 				'content' => $viewer->get_text($html, 'html', array())
+// 			);
+// 		}
 
-			return array(
-				'format' => 'markdown',
-				'content' => $viewer->get_text($html, 'html', array())
-			);
-		}
+                return array(
+                        'format' => 'html',
+                        'content' => qa_sanitize_html($html, false, true), // qa_sanitize_html() is ESSENTIAL for security
+                );
+
 	}
 
 // 	function load_script($fieldname)
