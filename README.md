@@ -1,8 +1,7 @@
 # mmd
 
-**MathMirrorDown** is an editor for Question2Answer with uikit's htmleditor powered by CodeMirror, MarkDown and MathJax.
+**MathMirrorDown** (Version 0.9) is an editor for Question2Answer with uikit's htmleditor powered by CodeMirror, MarkDown and MathJax.
 
-Version 0.9
 
 Plugin Minimum Question2Answer Version: 1.4
 
